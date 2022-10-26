@@ -56,7 +56,7 @@ router.put('/save', (req, res) => {
       ];
       Sketch.replaceOne({ _id: req.body._id }, updatedSketch)
         .then((updatedSketch) => res.json(`Sketch: ${sketch.name} saved!`))
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     })
     .catch((err) => console.error(err));
 });

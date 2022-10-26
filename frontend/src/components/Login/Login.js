@@ -97,6 +97,7 @@ export default function Login({ login, toastHandlerForPromises }) {
 
   const signupUser = (e) => {
     e.preventDefault();
+    setErrors({});
     toggleLogin(false);
   };
 

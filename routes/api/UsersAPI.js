@@ -23,7 +23,6 @@ router.post('/add', (req, res) => {
   User.find().then((users) => {
     users.forEach((user) => {
       existingColorsForUsers.push(user.color);
-      console.log(user.color, existingColorsForUsers);
     });
 
     let userColor = assignColorToUser();

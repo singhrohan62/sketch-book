@@ -12,6 +12,8 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import toast from 'react-hot-toast';
+
 import { useState } from 'react';
 
 import { signUpUser } from '../../APIs/User.js';
@@ -107,7 +109,7 @@ export default function Signup({ toggleLogin, toastHandlerForPromises }) {
 
     if (Object.keys(errors).length) {
       // Don't submit the form: show an alert to rectify the inputs
-      alert('Could not sign up. Press OK to check the error message(s)');
+      toast.error('Could not sign up. Press OK to check the error message(s)');
     } else {
       // handle form submission and go to Login page
       const signUpPromise = signUpUser(formData);

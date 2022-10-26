@@ -85,6 +85,7 @@ export const Options = ({
     sketchSkeleton.contents = [];
     sketchSkeleton.contents.push({ userid: currentUser._id, inputs: [] });
     addSketchHandler(sketchSkeleton);
+    toggleAddSketchForm(false);
   };
 
   return (

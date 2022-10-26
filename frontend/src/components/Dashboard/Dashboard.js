@@ -28,17 +28,34 @@ export default function Dashboard({
   useEffect(() => {
     const preloadData = async () => {
       // get names of existing sketches and set current sketch: first sketch in the list
-      const sketchNamesRes = await getNamesOfAllSketches();
+      if (!currentSketch) {
+        const sketchNamesRes = await getNamesOfAllSketches();
 
-      setSketchMetaData(sketchNamesRes.data);
+        setSketchMetaData(sketchNamesRes.data);
 
-      const currentSketch = sketchNamesRes.data[0]; // Selecting the first sketch in the list
-      setCurrentSketchMetaData(currentSketch);
+        const currSketch = sketchNamesRes.data[0]; // Selecting the first sketch in the list
+        setCurrentSketchMetaData(currSketch);
 
-      if (currentSketch && currentSketch._id) {
-        const sketchRes = await getSketch({ _id: currentSketch._id });
+        if (currSketch && currSketch._id) {
+          const sketchRes = await getSketch({ _id: currSketch._id });
 
-        setCurrentSketch(sketchRes.data);
+          setCurrentSketch(sketchRes.data);
+
+          // set Contributors list for current sketch
+          const sketchContributorsRes = await getContributorsForSketch({
+            _id: currSketch._id,
+          });
+          setSketchContributors(sketchContributorsRes.data);
+        }
+      } else {
+        // to reset the states when the current sketch changes
+        setCurrentSketchMetaData();
+        setSketchContributors([]);
+        const sketchNamesRes = await getNamesOfAllSketches();
+
+        setSketchMetaData(sketchNamesRes.data);
+
+        setCurrentSketchMetaData(currentSketch);
 
         // set Contributors list for current sketch
         const sketchContributorsRes = await getContributorsForSketch({
@@ -48,7 +65,7 @@ export default function Dashboard({
       }
     };
     preloadData();
-  }, []);
+  }, [currentSketch]);
 
   const handleSketchChange = (selectedSketch) => {
     const sketchPromise = getSketch({ _id: selectedSketch._id });
@@ -60,10 +77,6 @@ export default function Dashboard({
     );
     sketchPromise.then((res) => {
       setCurrentSketch(res.data);
-
-      setCurrentSketchMetaData(
-        sketchMetaData.filter((md) => md._id === res.data._id)[0]
-      );
     });
   };
 

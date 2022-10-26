@@ -20,14 +20,11 @@ export const Canvas = ({
 
   useEffect(() => {
     // Clear the canvas before rendering anything
-    if (context) {
-      context.clearRect(
-        0,
-        0,
-        canvasRef.current.width,
-        canvasRef.current.height
-      );
+    if (!context) {
+      context = canvasRef.current.getContext('2d');
     }
+    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
     if (existingSketch && existingSketch.contents.length) {
       // If sketch had existing content,
       // Then we need to fill it on canvas
