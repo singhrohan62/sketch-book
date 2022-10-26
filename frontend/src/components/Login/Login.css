@@ -1,0 +1,53 @@
+@import "../../styles.css";
+
+.container {
+  margin: auto;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.textfield-wrapper {
+  width: 50%;
+}
+
+.purple {
+  color: purple;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.anchor {
+  font-weight: bolder;
+  text-decoration: none;
+  margin: 1vh 0.5vw;
+  font-size: 1em;
+}
+
+.button-container {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  margin-top: 2vh;
+}
+
+.signup-container {
+  margin: 2vh 0;
+}
+
+.login-google {
+  margin: 0 1vw;
+  text-transform: none;
+  color: "#333";
+}
+
+.login-btn {
+  text-transform: none;
+  font-weight: bold;
+  margin: 0 2vw;
+}

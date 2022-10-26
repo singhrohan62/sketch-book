@@ -1,0 +1,16 @@
+.header-wrap {
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+    height: 10vh;
+    align-items: center;
+    padding-right: 2vw;
+  }
+  
+  .text-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 8px;
+  }
+  
