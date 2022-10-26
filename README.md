@@ -40,15 +40,15 @@ A web tool to scribble around. One can also collaborate with other users on sket
 
 - Authentication using JWT
 
-..\* As of now, the authentication is simple (required fields, email validation, password length).
+  - As of now, the authentication is simple (required fields, email validation, password length).
 
 - Authentication with Google (using Firebase).
 
 - Redo/Undo/Clear in Sketch
 
-..\* As of now, the user can only add the scribbles on the sketch (just like scribbling a pen on a white sheet).
+  - As of now, the user can only add the scribbles on the sketch (just like scribbling a pen on a white sheet).
 
-..\* Need to add options like: Redo/Undo/Clear.
+  - Need to add options like: Redo/Undo/Clear.
 
 - Real-time collaboration with other contributors to a sketch (just like Google Docs/Sheets).
 
