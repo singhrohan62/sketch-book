@@ -8,4 +8,11 @@ async function signUpUser(req) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/add`, req);
 }
 
-export { loginUser, signUpUser };
+async function resetPwdForUser(req) {
+  return axios.post(
+    `${process.env.REACT_APP_BACKEND_URL}/users/forgotpwd`,
+    req
+  );
+}
+
+export { loginUser, signUpUser, resetPwdForUser };

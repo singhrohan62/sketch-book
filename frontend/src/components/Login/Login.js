@@ -17,6 +17,7 @@ import { useState } from 'react';
 import Signup from '../Signup/Signup';
 
 import { loginUser } from '../../APIs/User';
+import ForgotPwd from './ForgotPwd';
 
 export default function Login({ login, toastHandlerForPromises }) {
   const [showLogin, toggleLogin] = useState(true);
@@ -27,6 +28,10 @@ export default function Login({ login, toastHandlerForPromises }) {
     email: '',
     password: '',
   });
+
+  const [errors, setErrors] = useState({});
+
+  const [showResetPwdDialog, toggleResetPwdDialog] = useState(false);
 
   const handleFormChange = (e) => {
     const inputKey = e.target.id;
@@ -57,8 +62,6 @@ export default function Login({ login, toastHandlerForPromises }) {
         break;
     }
   };
-
-  const [errors, setErrors] = useState({});
 
   // Regex for email validation
   const isEmail = (email) =>
@@ -158,7 +161,14 @@ export default function Login({ login, toastHandlerForPromises }) {
           fullWidth
         />
       </div>
-      <a href="" className="anchor purple" onClick={(e) => e.preventDefault()}>
+      <a
+        href=""
+        className="anchor purple"
+        onClick={(e) => {
+          e.preventDefault();
+          toggleResetPwdDialog(true);
+        }}
+      >
         Forgot password?
       </a>
       <div className="button-container">
@@ -199,10 +209,17 @@ export default function Login({ login, toastHandlerForPromises }) {
           <span className="login-google montesserat">Log In with Google</span>
         </Button>
       </div>
+      {showResetPwdDialog ? (
+        <ForgotPwd
+          open={showResetPwdDialog}
+          handleClose={function () {
+            toggleResetPwdDialog(false);
+          }}
+          toastHandlerForPromises={toastHandlerForPromises}
+        />
+      ) : null}
     </div>
   ) : (
-    <Signup
-      toggleLogin={toggleLogin}
-    />
+    <Signup toggleLogin={toggleLogin} />
   );
 }

@@ -52,8 +52,6 @@ A web tool to scribble around. One can also collaborate with other users on sket
 
 - Real-time collaboration with other contributors to a sketch (just like Google Docs/Sheets).
 
-- Forgot Password.
-
 ## End note
 
 At last, I would like to thank [Vivek H V](https://www.linkedin.com/in/vivek-h-v/) for giving me the opportunity to create such a project. This project was built as a screening assignment.

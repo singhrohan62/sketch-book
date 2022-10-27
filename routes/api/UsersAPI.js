@@ -58,6 +58,26 @@ router.post('/add', (req, res) => {
     });
 });
 
+// @route   POST api/users/forgotpwd
+// @desc    reset the password for user
+// @access  Public
+router.post('/forgotpwd', (req, res) => {
+  User.findOne({ email: req.body.email }).then((user) => {
+    const updatedUser = new User({
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      color: user.color,
+      password: req.body.newPassword,
+    });
+
+    updatedUser
+      .save()
+      .then((user) => res.json(user))
+      .catch((err) => console.error(err));
+  });
+});
+
 // @route   POST api/users/login
 // @desc    Log-in the user
 // @access  Public

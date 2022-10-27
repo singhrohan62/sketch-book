@@ -14,6 +14,11 @@
   width: 50%;
 }
 
+.textfield-wrapper-dialog {
+  width: 50%;
+  margin-left: 25%;
+}
+
 .purple {
   color: purple;
 }

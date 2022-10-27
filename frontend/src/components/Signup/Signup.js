@@ -109,7 +109,7 @@ export default function Signup({ toggleLogin }) {
 
     if (Object.keys(errors).length) {
       // Don't submit the form: show an alert to rectify the inputs
-      toast.error('Could not sign up. Press OK to check the error message(s)');
+      toast.error('Could not sign up. Press Check the error message(s)');
     } else {
       // handle form submission and go to Login page
       const signUpPromise = signUpUser(formData);
