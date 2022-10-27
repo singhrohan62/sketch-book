@@ -18,7 +18,7 @@ import { useState } from 'react';
 
 import { signUpUser } from '../../APIs/User.js';
 
-export default function Signup({ toggleLogin, toastHandlerForPromises }) {
+export default function Signup({ toggleLogin }) {
   const gotoLogin = (_) => toggleLogin(true);
 
   const [showPassword, togglePwdVisibility] = useState(false);
@@ -113,12 +113,14 @@ export default function Signup({ toggleLogin, toastHandlerForPromises }) {
     } else {
       // handle form submission and go to Login page
       const signUpPromise = signUpUser(formData);
-      toastHandlerForPromises(
-        signUpPromise,
-        'Signing up...',
-        'Signed up successfully!',
-        'Could not sign up. Please try again.'
-      );
+
+      toast.promise(signUpPromise, {
+        loading: 'Signing up...',
+        success: 'Signed up successfully!',
+        error: (err) =>
+          err.response.data.message || 'Could not sign up. Please try again.',
+      });
+
       signUpPromise.then((res) => gotoLogin());
     }
   };

@@ -18,33 +18,44 @@ router.get('/', (req, res) => {
 // @desc    Create a users
 // @access  Public
 router.post('/add', (req, res) => {
-  // First, assign color to the new user
-  const existingColorsForUsers = [];
-  User.find().then((users) => {
-    users.forEach((user) => {
-      existingColorsForUsers.push(user.color);
+  // Check if the user exists already (thru email ID)
+  User.find({ email: req.body.email })
+    .then((user) => {
+      res.status(400).send({
+        message: `User with email: "${req.body.email}" already exists!!`,
+      });
+      return;
+    })
+    .catch(() => {
+      // It means that the user with the email in req. body wasn't found
+      // First, assign color to the new user
+      const existingColorsForUsers = [];
+      User.find().then((users) => {
+        users.forEach((user) => {
+          existingColorsForUsers.push(user.color);
+        });
+
+        let userColor = assignColorToUser();
+
+        // This loop is used to prevent a duplicate color for two users
+        while (existingColorsForUsers.includes(userColor)) {
+          userColor = assignColorToUser();
+        }
+
+        const newUser = new User({
+          email: req.body.email,
+          password: req.body.password,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          color: userColor,
+        });
+
+        newUser
+          .save()
+          .then((user) => res.json(user))
+          .catch((err) => console.error(err));
+      });
     });
-
-    let userColor = assignColorToUser();
-
-    // This loop is used to prevent a duplicate color for two users
-    while (existingColorsForUsers.includes(userColor)) {
-      userColor = assignColorToUser();
-    }
-
-    const newUser = new User({
-      email: req.body.email,
-      password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      color: userColor,
-    });
-
-    newUser
-      .save()
-      .then((user) => res.json(user))
-      .catch((err) => console.error(err));
-  });
 });
 
 // @route   POST api/users/login

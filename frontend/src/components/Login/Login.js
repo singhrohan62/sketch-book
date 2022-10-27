@@ -203,7 +203,6 @@ export default function Login({ login, toastHandlerForPromises }) {
   ) : (
     <Signup
       toggleLogin={toggleLogin}
-      toastHandlerForPromises={toastHandlerForPromises}
     />
   );
 }
